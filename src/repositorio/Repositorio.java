@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 
 import modelo.Pessoa;
+
 import modelo.Mensagem;
 
 public class Repositorio {
@@ -26,8 +27,9 @@ public class Repositorio {
 	
 	
 	
-	public TreeMap<String, Pessoa> getPessoas() {
-		return Pessoas;
+	public ArrayList<Pessoa> getPessoas() {
+		return 
+				new ArrayList<Pessoa> (Pessoas.values());	//TreeMap --> ArrayList
 	}
 	public void setPessoa(TreeMap<String, Pessoa> pessoa) {
 		Pessoas = pessoa;
