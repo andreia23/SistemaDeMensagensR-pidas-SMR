@@ -1,11 +1,13 @@
 package modelo;
 
-public class Administrador {
+import java.awt.image.BufferedImage;
+
+public class Administrador extends Pessoa {
 	private String setor;
 	
 	
-	public Administrador(String setor) {
-		super();
+	public Administrador(String email, String senha, String nome, BufferedImage iconimage,String setor) {
+		super(email,senha,nome,iconimage);
 		this.setor = setor;
 	}
 
