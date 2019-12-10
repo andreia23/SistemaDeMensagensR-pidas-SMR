@@ -1,5 +1,6 @@
 package modelo;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Pessoa {
@@ -7,16 +8,17 @@ public class Pessoa {
 	private String email;
 	private String senha;
 	private String nome;
-	//private Bufferedlmage imagem;
     private ArrayList<Mensagem> caixaEntrada = new ArrayList<Mensagem>();
     private ArrayList<Mensagem> caixaSaida = new ArrayList<Mensagem>();
+	private BufferedImage iconimage;
     
     //Construtor
-	public Pessoa(String emal, String senha, String nome) {
+	public Pessoa(String emal, String senha, String nome, BufferedImage iconimage) {
 		super();
 		this.email = emal;
 		this.senha = senha;
 		this.nome = nome;
+		this.iconimage = iconimage;
 	}
 	
 	// Métodos getters e setters
@@ -42,6 +44,12 @@ public class Pessoa {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	public BufferedImage getIconImage() {
+		return iconimage;
+	}
+	public void setIconImage(BufferedImage iconimage) {
+		this.iconimage = iconimage;
 	}
 
 	@Override
