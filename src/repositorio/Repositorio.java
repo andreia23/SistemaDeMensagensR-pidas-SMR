@@ -27,9 +27,21 @@ public class Repositorio {
 	
 	
 	
-	public ArrayList<Pessoa> getPessoas() {
-		return 
-				new ArrayList<Pessoa> (Pessoas.values());	//TreeMap --> ArrayList
+	public ArrayList<Pessoa> getPessoas(String termo) {
+		 if (termo == null) {
+			 new ArrayList<Pessoa> (Pessoas.values());	//TreeMap --> ArrayList
+		 } else {
+			 
+			 ArrayList<Pessoa> pessoas = new ArrayList<>();
+			 for(Pessoa p : Pessoas.values()){
+		            if(p.getNome().equals(termo))
+		                pessoas.add(p);
+		     return pessoas;
+			 }
+			
+		}
+		return null;
+				
 	}
 	public void setPessoa(TreeMap<String, Pessoa> pessoa) {
 		Pessoas = pessoa;
