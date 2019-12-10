@@ -23,6 +23,9 @@ public class Repositorio {
 	}
 	
 	
+	/*public void adicionarAdim(Administrador	 p){
+		Pessoas.put(p.getEmail()+p.getSenha(),  p); //chave concatenada
+	}*/
 	
 	
 	
