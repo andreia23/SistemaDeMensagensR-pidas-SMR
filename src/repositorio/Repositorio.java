@@ -26,9 +26,7 @@ public class Repositorio {
 	/*public void adicionarAdim(Administrador	 p){
 		Pessoas.put(p.getEmail()+p.getSenha(),  p); //chave concatenada
 	}*/
-	
-	
-	
+
 	
 	public ArrayList<Pessoa> getPessoas(String termo) {
 		 if (termo == null) {
@@ -56,4 +54,9 @@ public class Repositorio {
 		Mensagens = mensagem;
 	}
 	
+
+
+  public void removermensagem(Mensagem m){
+    mensagem.remove(m)
+  }
 }

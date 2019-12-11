@@ -11,7 +11,7 @@ import repositorio.Repositorio;
 public class Fachada {
 	private static Repositorio repositorio = new Repositorio();
 	private static Pessoa logado;
-	private static int idprateleira=0;	//autoincremento
+	private static int idmsg=0;	//autoincremento
 
 	///localiza a pessoa no repositorio, a torna pessoa logada e retorna esta pessoa
 	public static Pessoa login(String email, String senha) throws  Exception {
@@ -62,42 +62,53 @@ public class Fachada {
 	/*public static Pessoa cadastrarAdministrador(String email, String senha, String nome, BufferedImage iconimage,String setor) {
 		return "Falta";}*/
 	
-	
 	public static ArrayList<Pessoa> listarPessoas(String termo) {
 		return repositorio.getPessoas(termo);
 		
 	}
 	
-		
-	
 	//cria uma nova mensagem, considerando que o emitente é a pessoa logada
-	/*public static Mensagem enviarMensagem(String destinatario, String texto) {
-		throws Exception{
-				Pessoa usu = repositorio.setMensagem(mensagem);
-				if(usu==null) {					
-					throw new Exception("")
+	public static Mensagem enviarMensagem(Pessoa destinatario, String texto) {
+		        throws Exception{
+				//Pessoa usu = repositorio.setMensagem(mensagem);
+				if(logado==null) {					
+					throw new Exception("Faça login")
 				}
-				
+				Mensagem m = repositorio.localizarUsuario(idmsg);// acho que nao é localizar usuario, e sim localizar mensagem
+        if (m!=null){
+          throw new Exception("Mensagem ja foi enviada:")
+        }
+        //falta terminar
 			}
 	}
-	*/
+	
+	//Listar Caixa de Entrada - arraylist
+	// Retorna as mensagem recebidas pela pessoa logada
 	public static ArrayList<Mensagem> listarCaixaEntrada(){
 		return repositorio.getMensagens();
 	}
 	
-		
-	
-	//Listar Caixa de Entrada - arraylist
-	// Retorna as mensagem recebidas pela pessoa logada
-	
-	
 	//Listar Caixa de Saída - arraylist
 	// Retorna as mensagen enviadas pela pessoa logada
-	
+  public static ArrayList<Mensagem> listarCaixaSaida(){
+    return repositorio.getMensagens();
+  }
 	
 	//Apagar Mensagem
 	// Exclui a mensagem da caixa de entrada e/ou saida da pessoa logada e retorna a mensagem excluida
-	
+	public static Mensagem apagarMensagem(int idmsg)
+        throws Exception {
+      if(logado==null){
+        throw new Exception("Faça login");
+      }
+      Mensagem msg = repositorio.localizarMensagem(idmsg)
+      if(msg==null){
+        throw new Exception("Mensagem não encontrada")
+      }
+      repositorio.removermensagem(msg);
+      return msg;
+    }
+
 	
 	//Espionar Mensagem - arraylist
 	//Retorna as mensagens cujo texto contem o termo fornecido
