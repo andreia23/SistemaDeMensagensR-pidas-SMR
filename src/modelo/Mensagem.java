@@ -8,10 +8,10 @@ public class Mensagem {
 		private Pessoa eminente;
 		private Pessoa destinatario;
 		private String texto;
-	    private LocalDateTime data;
+	    private String data;
 	    
 	    //Construtor
-		public Mensagem(int id, Pessoa eminente, Pessoa destinatario, String texto, LocalDateTime data) {
+		public Mensagem(int id, Pessoa eminente, Pessoa destinatario, String texto, String data) {
 			super();
 			this.id = id;
 			this.eminente = eminente;
@@ -20,7 +20,7 @@ public class Mensagem {
 			this.data = data;
 		}
 	    
-		// Métodos getters e setters
+		// MÃ©todos getters e setters
 		public int getId() {
 			return id;
 		}
@@ -45,10 +45,10 @@ public class Mensagem {
 		public void setTexto(String texto) {
 			this.texto = texto;
 		}
-		public LocalDateTime getData() {
+		public String getData() {
 			return data;
 		}
-		public void setData(LocalDateTime data) {
+		public void setData(String data) {
 			this.data = data;
 		}
 
