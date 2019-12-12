@@ -144,8 +144,8 @@ public class TesteConsole {
  
         try {   
             ImageIcon icon=null;
-//          icon = new ImageIcon(getClass.getResource("/imagens/pessoa.jpg"));
-            icon = new ImageIcon(getClass().getResource("/pessoa.jpg"));
+            icon = new ImageIcon(getClass().getResource("/imagens/pessoa.jpg"));
+            //icon = new ImageIcon(getClass().getResource("/pessoa.jpg"));
 //          icon = new ImageIcon("c:/pessoa.jpg"));
             p = Fachada.cadastrarPessoa("ana@ifpb", "123", "ana", icon);
         }catch (Exception e) {
