@@ -3,9 +3,9 @@ package fachada;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import modelo.Pessoa;
+import modelo.Administrador;
 import modelo.Mensagem;
-
+import modelo.Pessoa;
 import repositorio.Repositorio;
 
 public class Fachada {
@@ -59,15 +59,27 @@ public class Fachada {
 	}
 	
 	///cadastrar Administrador
-	/*public static Pessoa cadastrarAdministrador(String email, String senha, String nome, BufferedImage iconimage,String setor) {
-		return "Falta";}*/
+	public static Administrador cadastrarAdministrador(String email, String senha, String nome,BufferedImage iconimage,String setor) 
+		throws Exception {
+		
+			Pessoa administrador = repositorio.localizarUsuario(email,senha);
+			if ( administrador != null ) {
+				throw new Exception("Usuário " + email + " já cadastrado");
+			}
+	
+			administrador = new Administrador(email, senha, nome, iconimage, setor);
+	
+			repositorio.adicionar(administrador);
+	
+			return (Administrador) administrador;
+	}
 	
 	public static ArrayList<Pessoa> listarPessoas(String termo) {
 		return repositorio.getPessoas(termo);
 		
 	}
 	
-	//cria uma nova mensagem, considerando que o emitente é a pessoa logada
+	//cria uma nova mensagem, considerando que o emitente Ã© a pessoa logada
 	public static Mensagem enviarMensagem(String destinatario, String texto) 
 			throws Exception{
 		//Pessoa usu = repositorio.setMensagem(mensagem);
@@ -88,25 +100,25 @@ public class Fachada {
 		return repositorio.getMensagens();
 	}
 	
-	//Listar Caixa de Saída - arraylist
+	//Listar Caixa de SaÃ­da - arraylist
 	// Retorna as mensagen enviadas pela pessoa logada
-  public static ArrayList<Mensagem> listarCaixaSaida(){
-    return repositorio.getMensagens();
-  }
+	public static ArrayList<Mensagem> listarCaixaSaida(){
+		return repositorio.getMensagens();
+	}
 	
 	//Apagar Mensagem
 	// Exclui a mensagem da caixa de entrada e/ou saida da pessoa logada e retorna a mensagem excluida
-	public static Mensagem apagarMensagem(int idmsg)
+	public static Mensagem apagarMensa(int id)
         throws Exception {
       if(logado==null){
-        throw new Exception("Faça login");
+        throw new Exception("Você não está logado, é preciso fazer login");
       }
-      Mensagem msg = repositorio.localizarMensagem(idmsg);
-      if(msg==null){
-        throw new Exception("Mensagem não encontrada");
+      Mensagem mensagem = repositorio.localizarMensagem(id);
+      if(mensagem==null){
+        throw new Exception("A Mensagem não foi encontrada");
       }
-      repositorio.removermensagem(msg);
-      return msg;
+      repositorio.removerMensagem(mensagem);
+      return mensagem;
     }
 
 	
