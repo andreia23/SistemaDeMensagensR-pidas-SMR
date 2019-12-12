@@ -87,7 +87,7 @@ public class Login extends JFrame {
 					Pessoa usuario = Fachada.login(email,senha);
 
 					if (usuario!=null)
-						label_2.setText("bemvindo: "+usuario.getEmail());
+						label_2.setText("bemvindo: "+usuario.getNome());
 					else
 						label_2.setText("tente novamente !");
 				} catch (Exception e) {
