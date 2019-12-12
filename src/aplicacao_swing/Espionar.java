@@ -38,7 +38,7 @@ public class Espionar extends JFrame {
 	 */
 	public Espionar() {
 		
-		setTitle("Listagem");
+		setTitle("Espionar");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 714, 372);		
@@ -62,8 +62,8 @@ public class Espionar extends JFrame {
 					String texto;
 					ArrayList<Mensagem> lista = new ArrayList<Mensagem>();
 
-					/*if (palavraChaveField.getText().isEmpty())
-						lista=Fachada.espionarMensagens();
+					if (palavraChaveField.getText().isEmpty())
+						lista=Fachada.espionarMensagens("");
 
 					else
 						lista=Fachada.espionarMensagens(palavraChaveField.getText());
@@ -73,7 +73,7 @@ public class Espionar extends JFrame {
 					for(Mensagem mensagem: lista)
 						texto +=  mensagem + "\n";
 
-					textArea.setText(texto);*/
+					textArea.setText(texto);
 				}
 				catch(Exception erro){
 					JOptionPane.showMessageDialog(null,erro.getMessage());
