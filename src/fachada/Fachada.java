@@ -68,19 +68,19 @@ public class Fachada {
 	}
 	
 	//cria uma nova mensagem, considerando que o emitente é a pessoa logada
-	public static Mensagem enviarMensagem(Pessoa destinatario, String texto) {
-		        throws Exception{
-				//Pessoa usu = repositorio.setMensagem(mensagem);
-				if(logado==null) {					
-					throw new Exception("Faça login")
-				}
-				Mensagem m = repositorio.localizarUsuario(idmsg);// acho que nao é localizar usuario, e sim localizar mensagem
-        if (m!=null){
-          throw new Exception("Mensagem ja foi enviada:")
-        }
-        //falta terminar
-			}
-	}
+	public static Mensagem enviarMensagem(String destinatario, String texto) 
+			throws Exception{
+		//Pessoa usu = repositorio.setMensagem(mensagem);
+		if(logado==null) {					
+			throw new Exception("Precisa fazer login");
+		};
+		Mensagem m = repositorio.localizarMensagem(idmsg);// acho que nao e localizar usuario, e sim localizar mensagem
+        	if (m!=null){
+          	throw new Exception("Mensagem ja foi enviada:");
+        	};
+        	return m;
+        	//falta terminar
+		}
 	
 	//Listar Caixa de Entrada - arraylist
 	// Retorna as mensagem recebidas pela pessoa logada
