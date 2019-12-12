@@ -1,7 +1,11 @@
 package fachada;
 
 import java.awt.image.BufferedImage;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
 
 import modelo.Administrador;
 import modelo.Mensagem;
@@ -11,7 +15,7 @@ import repositorio.Repositorio;
 public class Fachada {
 	private static Repositorio repositorio = new Repositorio();
 	private static Pessoa logado;
-	private static int idmsg=0;	//autoincremento
+	private static int idmsg=1;	//autoincremento
 
 	///localiza a pessoa no repositorio, a torna pessoa logada e retorna esta pessoa
 	public static Pessoa login(String email, String senha) throws  Exception {
@@ -26,18 +30,12 @@ public class Fachada {
 	}
 	
 	//descarta a pessoa logada
-	public static Pessoa logoff(String email, String senha) throws  Exception {
-		if(logado==null)
+	public static void logoff() throws  Exception {
+		if(logado==null){
 			throw new Exception("nao existe um usuario logado:");
-		
-		Pessoa usu = repositorio.localizarUsuario(email,senha);
-		if(usu==null)
-			throw new Exception("email ou senha invalida:");
-		if(usu!=logado)
-			throw new Exception("este usuario nao esta logado:");
-		
+		}
 		logado = null; 
-		return usu;
+		
 	}
 	
 	// retorna a pessoa a logada
@@ -46,7 +44,7 @@ public class Fachada {
 	}
 	
 	//cadastrar Pessoas
-	public static Pessoa cadastrarPessoa(String email, String senha, String nome, BufferedImage iconimage) 
+	public static Pessoa cadastrarPessoa(String email, String senha, String nome, ImageIcon iconimage) 
 		///FALTA
 		throws  Exception{
 			Pessoa usu = repositorio.localizarUsuario(email,senha);
@@ -58,8 +56,28 @@ public class Fachada {
 			return usu;
 	}
 	
+	
+	
+	public static Pessoa cadastrarPessoa(
+			String email,
+			String senha,
+			String nome)
+			throws  Exception{
+
+		Pessoa usuario = repositorio.localizarUsuario(email,senha);
+		if ( usuario != null ) {
+			throw new Exception("Usuário " + email + " já cadastrado");
+		}
+
+		usuario = new Pessoa(email, senha, nome);
+
+		repositorio.adicionar(usuario);
+
+		return usuario;
+	}
+	
 	///cadastrar Administrador
-	public static Administrador cadastrarAdministrador(String email, String senha, String nome,BufferedImage iconimage,String setor) 
+	public static Administrador cadastrarAdministrador(String email, String senha, String nome,ImageIcon iconimage,String setor) 
 		throws Exception {
 		
 			Pessoa administrador = repositorio.localizarUsuario(email,senha);
@@ -74,46 +92,127 @@ public class Fachada {
 			return (Administrador) administrador;
 	}
 	
-	public static ArrayList<Pessoa> listarPessoas(String termo) {
-		return repositorio.getPessoas(termo);
+	public static Administrador cadastrarAdministrador(
+			String email,
+			String senha,
+			String nome,
+			String setor)
+			throws  Exception{
+
+		Administrador admin = (Administrador) repositorio.localizarUsuario(email,senha);
 		
+		if ( admin != null ) {
+			throw new Exception("Usuário " + email + " já cadastrado");
+		}
+
+		admin = new Administrador(email, senha, nome, setor);
+
+		repositorio.adicionar(admin);
+
+		
+		return (Administrador) admin;
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public static ArrayList<Pessoa> listarPessoas(String termoBusca) throws Exception {
+		ArrayList<Pessoa> retorno = new ArrayList<Pessoa>();
+
+		for (Pessoa pessoa : repositorio.getPessoas()) {
+			if (pessoa.getNome().contains(termoBusca)) {
+				retorno.add(pessoa);
+			}
+		}
+
+		if (retorno.size()==0)
+			throw new Exception("Não encontramos usuário com o seguinte termo de busca: "+termoBusca);
+
+		return retorno;
+	}
+
+	public static ArrayList<Pessoa> listarPessoas() {
+		return repositorio.getPessoas();
+	}
+		
+	
+	
 	//cria uma nova mensagem, considerando que o emitente Ã© a pessoa logada
-	public static Mensagem enviarMensagem(String destinatario, String texto) 
+	public static Mensagem enviarMensagem(String email_desti, String texto) 
 			throws Exception{
 		//Pessoa usu = repositorio.setMensagem(mensagem);
 		if(logado==null) {					
 			throw new Exception("Precisa fazer login");
 		};
-		Mensagem m = repositorio.localizarMensagem(idmsg);// acho que nao e localizar usuario, e sim localizar mensagem
-        	if (m!=null){
-          	throw new Exception("Mensagem ja foi enviada:");
-        	};
+		Mensagem m = repositorio.localizarMensagem(idmsg);
+		Pessoa destinatario = repositorio.localizarUsuario(email_desti);
+		
+        	
+        	
+        	idmsg ++;
+        	LocalDateTime time;
+    		String data;
+    		time = LocalDateTime.now();
+    		///FORMATANDO A DATA
+    		data = time.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+        	m = new Mensagem(idmsg,getLogado(),destinatario,texto,data);
+    		repositorio.adicionarMensagem(m);
+    		destinatario.addCaixaEntrada(m);
+    		logado.addCaixaSaida(m);
+    		 	
         	return m;
-        	//falta terminar
-		}
+		
+	
+	}
 	
 	//Listar Caixa de Entrada - arraylist
 	// Retorna as mensagem recebidas pela pessoa logada
-	public static ArrayList<Mensagem> listarCaixaEntrada(){
-		return repositorio.getMensagens();
+	public static ArrayList<Mensagem> listarCaixaEntrada()
+		throws Exception{
+			if (logado == null)
+				throw new Exception("Voce precisa estar logado para listar mensagens");
+			if (logado.getCaixaEntrada().size()==0)
+				throw new Exception("Voce não tem mensagens na caixa de entrada");
+	
+			return logado.getCaixaEntrada();
 	}
+	
+		
 	
 	//Listar Caixa de SaÃ­da - arraylist
 	// Retorna as mensagen enviadas pela pessoa logada
-	public static ArrayList<Mensagem> listarCaixaSaida(){
-		return repositorio.getMensagens();
+	public static ArrayList<Mensagem> listarCaixaSaida() 
+		throws Exception{
+			if (logado == null)
+				throw new Exception("Voce precisa estar logado para listar mensagens");
+			if (logado.getCaixaSaida().size()==0)
+				throw new Exception("Voce não tem mensagens na caixa de saída");
+	
+			return logado.getCaixaSaida();
 	}
 	
+	
+
 	//Apagar Mensagem
 	// Exclui a mensagem da caixa de entrada e/ou saida da pessoa logada e retorna a mensagem excluida
-	public static Mensagem apagarMensa(int id)
+	public static Mensagem apagarMensa(int idmsg)
         throws Exception {
       if(logado==null){
         throw new Exception("Você não está logado, é preciso fazer login");
       }
-      Mensagem mensagem = repositorio.localizarMensagem(id);
+      Mensagem mensagem = repositorio.localizarMensagem(idmsg);
       if(mensagem==null){
         throw new Exception("A Mensagem não foi encontrada");
       }
@@ -121,6 +220,13 @@ public class Fachada {
       return mensagem;
     }
 
+	
+	
+	
+	
+	
+	
+	
 	
 	//Espionar Mensagem - arraylist
 	//Retorna as mensagens cujo texto contem o termo fornecido
