@@ -20,7 +20,7 @@ public class Mensagem {
 			this.data = data;
 		}
 	    
-		// Métodos getters e setters
+		// MÃ©todos getters e setters
 		public int getId() {
 			return id;
 		}
