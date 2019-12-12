@@ -1,27 +1,27 @@
 package aplicacao_swing;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import fachada.Fachada;
 import modelo.Mensagem;
-import modelo.Pessoa;
+
 
 public class EnviarMensa extends JFrame {
 
 	private JPanel contentPane;
-	private JTextArea textArea;
-	private JButton btnConsulta_1;
-	private JButton btnConsulta_2;
+	private JTextField emailField;
+	private JLabel lblNome;
+	private JButton btnCriar;
+	private JLabel lblmsg;
+	private JLabel lblTextoMensagem;
+	private JTextField textoMsgField;
 
 	/**
 	 * Launch the application.
@@ -30,7 +30,7 @@ public class EnviarMensa extends JFrame {
 //		EventQueue.invokeLater(new Runnable() {
 //			public void run() {
 //				try {
-//					TelaConsulta frame = new TelaConsulta();
+//					TelaCadastroPrateleira frame = new TelaCadastroPrateleira();
 //					frame.setVisible(true);
 //				} catch (Exception e) {
 //					e.printStackTrace();
@@ -40,69 +40,60 @@ public class EnviarMensa extends JFrame {
 //	}
 
 	/**
-	 * Create the frame.
+	 * Create the frame.icon
 	 */
 	public EnviarMensa() {
-		setTitle("Consultar");
+		setTitle("Escrever ");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 744, 289);
+		setBounds(100, 100, 419, 226);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		btnConsulta_1 = new JButton("Relatório 1");
-		btnConsulta_1.addActionListener(new ActionListener() {
+		emailField = new JTextField();
+		emailField.setBounds(129, 14, 255, 21);
+		contentPane.add(emailField);
+		emailField.setColumns(10);
+
+		lblNome = new JLabel("Email_Des");
+		lblNome.setBounds(23, 16, 103, 19);
+		contentPane.add(lblNome);
+
+		btnCriar = new JButton("Enviar");
+		btnCriar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
-					/*String texto;
-					ArrayList<Pessoa> lista1 = Fachada.relatorio1();
-					texto = "Listagem de usuários sem mensagens: \n";
-					if (lista1.isEmpty())
-						texto += "não existe";
-					else 	
-						for(Pessoa p: lista1)
-							texto +=  p + "\n"; 
 
-					textArea.setText(texto);*/
+					String textoMsg = textoMsgField.getText();
+					String email = emailField.getText();
+					Mensagem msg = Fachada.enviarMensagem(email, textoMsg);
+					
+					lblmsg.setText("Mensagem id="+msg.getId());
+					emailField.setText("");
+					emailField.requestFocus();
 				}
 				catch(Exception erro){
-					JOptionPane.showMessageDialog(null,erro.getMessage());
+					lblmsg.setText(erro.getMessage());
+
 				}
 			}
 		});
-		btnConsulta_1.setBounds(414, 81, 271, 23);
-		contentPane.add(btnConsulta_1);
+		btnCriar.setBounds(142, 127, 115, 23);
+		contentPane.add(btnCriar);
+		
+		lblmsg = new JLabel("");
+		lblmsg.setBounds(92, 162, 233, 14);
+		contentPane.add(lblmsg);
 
-		textArea = new JTextArea();
-		JScrollPane scroll = new JScrollPane(textArea);
-		scroll.setBounds(24, 11, 378, 236);
-		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		contentPane.add(scroll);
+		lblTextoMensagem = new JLabel("Texto Mensagem");
+		lblTextoMensagem.setBounds(23, 49, 103, 19);
+		contentPane.add(lblTextoMensagem);
 
-		btnConsulta_2 = new JButton("Relatório 2");
-		btnConsulta_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String texto;
-				ArrayList<Mensagem> lista1 = null;
-				try {
-					//lista1 = Fachada.relatorio2();
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-				texto = "Listagem de mensagens com mesmo destinatário e remetente: \n";
-				if (lista1.isEmpty())
-					texto += "não existe\n";
-				else 	
-					for(Mensagem m: lista1)
-						texto +=  m + "\n";
-
-				textArea.setText(texto);
-			}
-		});
-		btnConsulta_2.setBounds(414, 133, 271, 23);
-		contentPane.add(btnConsulta_2);
+		textoMsgField = new JTextField();
+		textoMsgField.setColumns(10);
+		textoMsgField.setBounds(129, 47, 266, 60);
+		contentPane.add(textoMsgField);
 	}
 }
