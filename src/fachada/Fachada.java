@@ -101,9 +101,9 @@ public class Fachada {
       if(logado==null){
         throw new Exception("Faça login");
       }
-      Mensagem msg = repositorio.localizarMensagem(idmsg)
+      Mensagem msg = repositorio.localizarMensagem(idmsg);
       if(msg==null){
-        throw new Exception("Mensagem não encontrada")
+        throw new Exception("Mensagem não encontrada");
       }
       repositorio.removermensagem(msg);
       return msg;
