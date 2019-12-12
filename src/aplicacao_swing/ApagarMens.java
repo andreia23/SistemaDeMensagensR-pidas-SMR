@@ -54,7 +54,7 @@ public class ApagarMens extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		setTitle("Apagar Produto");
+		setTitle("Apagar Mensagem");
 		setBounds(100, 100, 345, 175);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		contentPane = new JPanel();
@@ -70,14 +70,14 @@ public class ApagarMens extends JFrame {
 		idMsg.setBounds(143, 26, 170, 21);
 		contentPane.add(this.idMsg);
 		idMsg.setColumns(10);
-		btnApagar = new JButton("Apagar");
+		btnApagar = new JButton("_Apagar_");
 		btnApagar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 
 					int idMsgText = Integer.parseInt(idMsg.getText());
 					Mensagem mensagem = Fachada.apagarMensa(idMsgText);
-					lblmsg.setText("Produto excluido com sucesso "+mensagem.getId());
+					lblmsg.setText("Mensagem excluida com sucesso "+mensagem.getId());
 
 				} catch (Exception e) {
 					lblmsg.setText(e.getMessage());
@@ -86,10 +86,10 @@ public class ApagarMens extends JFrame {
 		});
 		btnApagar.setBounds(19, 71, 136, 23);
 		contentPane.add(this.btnApagar);
-		lblmsg = new JLabel("Mensagem do usuario");
+		lblmsg = new JLabel("Mensagem_usuario");
 		lblmsg.setBounds(19, 120, 294, 14);
 		contentPane.add(this.lblmsg);
-		btnLimpar = new JButton("Limpar");
+		btnLimpar = new JButton("_Limpar_");
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				idMsg.setText("");
