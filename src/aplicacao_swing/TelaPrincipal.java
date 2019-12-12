@@ -46,7 +46,9 @@ public class TelaPrincipal {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    TelaPrincipal window = new TelaPrincipal();
+                	new TesteConsole().teste1();
+                	
+                	TelaPrincipal window = new TelaPrincipal();
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -66,9 +68,10 @@ public class TelaPrincipal {
      * Initialize the contents of the frame.
      */
     private void initialize() {
+    	
         frame = new JFrame();
         frame.setResizable(false);
-        frame.setTitle("SMR - Sistema de Mensagens Rápidas");
+        frame.setTitle("Sistema de Mensagens RÃ¡pidas");
 
         frame.addWindowListener(new WindowAdapter() {
             @Override
@@ -83,7 +86,7 @@ public class TelaPrincipal {
             }
             @Override
             public void windowClosing(WindowEvent e) {
-                JOptionPane.showMessageDialog(null, "Até breve !");
+                JOptionPane.showMessageDialog(null, "Tchau");
             }
         });
 
@@ -102,14 +105,14 @@ public class TelaPrincipal {
         frame.setResizable(true);
 
         //-------------BARRA DE MENU-----------------------------------
-        JMenuBar menuBar = new JMenuBar();
-        frame.setJMenuBar(menuBar);
+        JMenuBar menu = new JMenuBar();
+        frame.setJMenuBar(menu);
 
         //-------------MENU-----------------------------------
-        mnMensagem = new JMenu("Mensagem");
-        menuBar.add(mnMensagem);
+        mnMensagem = new JMenu("_Mensagem_");
+        menu.add(mnMensagem);
 
-        itemEnviar = new JMenuItem("Enviar");
+        itemEnviar = new JMenuItem("_Enviar_");
         itemEnviar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 if(Fachada.getLogado()==null)
@@ -122,7 +125,7 @@ public class TelaPrincipal {
         });
         mnMensagem.add(itemEnviar);
 
-        itemListarEntrada = new JMenuItem("ListarCxEntrada");
+        itemListarEntrada = new JMenuItem("CaixaEntrada");
         itemListarEntrada.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 if(Fachada.getLogado()==null)
@@ -135,7 +138,7 @@ public class TelaPrincipal {
         });
         mnMensagem.add(itemListarEntrada);
 
-        itemListarSaida = new JMenuItem("ListarCxSaida");
+        itemListarSaida = new JMenuItem("CaixaSaida");
         itemListarSaida.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(Fachada.getLogado()==null)
@@ -148,7 +151,7 @@ public class TelaPrincipal {
         });
         mnMensagem.add(itemListarSaida);
 
-        itemApagar = new JMenuItem("Apagar Mensagem");
+        itemApagar = new JMenuItem("_Apagar Mensagem_");
         itemApagar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 if(Fachada.getLogado()==null)
@@ -161,7 +164,7 @@ public class TelaPrincipal {
         });
         mnMensagem.add(itemApagar);
 
-        itemEspionar = new JMenuItem("Espionar");
+        itemEspionar = new JMenuItem("_Espionar_");
         itemEspionar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 if(Fachada.getLogado()==null && Fachada.getLogado() instanceof Administrador)
@@ -176,10 +179,10 @@ public class TelaPrincipal {
 
 
         //-------------MENU-----------------------------------
-        mnPessoa = new JMenu("Pessoa");
-        menuBar.add(mnPessoa);
+        mnPessoa = new JMenu("_Pessoa_");
+        menu.add(mnPessoa);
 
-        itemLogin = new JMenuItem("Login");
+        itemLogin = new JMenuItem("_Login_");
         itemLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 Login j = new Login();
@@ -188,7 +191,7 @@ public class TelaPrincipal {
         });
         mnPessoa.add(itemLogin);
 
-        itemLogff = new JMenuItem("Logoff");
+        itemLogff = new JMenuItem("_Logoff_");
         itemLogff.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 try {
@@ -200,7 +203,7 @@ public class TelaPrincipal {
         });
         mnPessoa.add(itemLogff);
 
-        itemCadastrar = new JMenuItem("Cadastrar");
+        itemCadastrar = new JMenuItem("_Cadastrar_");
         itemCadastrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 CadastaUsu j = new CadastaUsu();
@@ -209,7 +212,7 @@ public class TelaPrincipal {
         });
         mnPessoa.add(itemCadastrar);
 
-        itemCadAdmin = new JMenuItem("Cadastrar Admin");
+        itemCadAdmin = new JMenuItem("_Cadastrar Admin_");
         itemCadAdmin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 CadasAdimin j = new CadasAdimin();
@@ -218,7 +221,7 @@ public class TelaPrincipal {
         });
         mnPessoa.add(itemCadAdmin);
 
-        itemListarPessoa = new JMenuItem("Listar");
+        itemListarPessoa = new JMenuItem("_Listar_");
         itemListarPessoa.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 Listagem j = new Listagem();
@@ -228,8 +231,8 @@ public class TelaPrincipal {
         mnPessoa.add(itemListarPessoa);
 
         //-------------MENU-----------------------------------
-        mnRelatorio = new JMenu("Relatorio");
-        menuBar.add(mnRelatorio);
+        mnRelatorio = new JMenu("_Relatorio_");
+        menu.add(mnRelatorio);
         mnRelatorio.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
