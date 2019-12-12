@@ -15,27 +15,7 @@ public class Repositorio {
 	public void adicionar(Pessoa u){
 		Pessoas.put(u.getEmail()+u.getSenha(),  u); //chave concatenada
 	}
-	public void remover(Pessoa u){
-		Pessoas.remove(u.getEmail()+u.getSenha());
-	}
-	public Pessoa localizarUsuario(String email, String senha){
-		return Pessoas.get(email+senha);
-	}
 	
-	
-	/*public void adicionarAdim(Administrador	 p){
-		Pessoas.put(p.getEmail()+p.getSenha(),  p); //chave concatenada
-	}*/
-
-	public void adicionarMensagem(Mensagem mensagem) {
-		mensagem.add(mensagem);
-	}
-	public void removermensagem(Mensagem mensagem){
-		mensagem.remove(mensagem);
-	}
-	public Mensagem localizarMensagem(int idmensagem) {
-		//falta
-	}
 	
 	public ArrayList<Pessoa> getPessoas(String termo) {
 		 if (termo == null) {
@@ -53,17 +33,55 @@ public class Repositorio {
 		return null;
 				
 	}
-	public void setPessoa(TreeMap<String, Pessoa> pessoa) {
-		Pessoas = pessoa;
+	
+	
+	public Pessoa localizarUsuario(String email, String senha){
+		return Pessoas.get(email+senha);
 	}
+	
+	
+	public void remover(Pessoa u){
+		Pessoas.remove(u.getEmail()+u.getSenha());
+	}
+	
+	
+	
+	
+	public void adicionarMensagem(Mensagem mensagem){
+		Mensagens.add(mensagem);
+	}
+	
+
 	public ArrayList<Mensagem> getMensagens() {
 		return Mensagens;
 	}
+	
+	
+	public Mensagem localizarMensagem(int id){
+		for(Mensagem m : Mensagens){
+            if(m.getId()==id)
+                return m;
+        }
+        return null;
+	}
+	
+	public void removerMensagem(Mensagem mensagem){
+		Mensagens.remove(mensagem);
+	}
+	
+	
+	public int todasMensagens(){
+		return Mensagens.size();
+	}
+
+	
+	public void setPessoa(TreeMap<String, Pessoa> pessoa) {
+		Pessoas = pessoa;
+	}
+	
 	public void setMensagem(ArrayList<Mensagem> mensagem) {
 		Mensagens = mensagem;
 	}
 	
-
-
 
 }
