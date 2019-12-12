@@ -3,8 +3,8 @@ package aplicacao_console;
 
 /**********************************
  * IFPB - Curso Superior de Tec. em Sist. para Internet
- * Programa��o Orientada a Objetos
- * Prof. Fausto Maranh�o Ayres
+ * Programaï¿½ï¿½o Orientada a Objetos
+ * Prof. Fausto Maranhï¿½o Ayres
  * 
  * Teste do projeto de POO
  **********************************/
@@ -26,10 +26,10 @@ public class TesteConsole {
         Mensagem m;
  
         try {
-            p = Fachada.cadastrarPessoa("joao@ifpb", "123", "joao", null);
-            p = Fachada.cadastrarPessoa("maria@ifpb", "123", "maria", null);
-            p = Fachada.cadastrarPessoa("jose@ifpb", "123", "jose", null);
-            p = Fachada.cadastrarAdministrador("admin@ifpb", "123", "admin1", null, "DTI");
+            p = Fachada.cadastrarPessoa("joao", "123", "joao@ifpb", null);
+            p = Fachada.cadastrarPessoa("maria", "123", "maria@ifpb", null);
+            p = Fachada.cadastrarPessoa("jose", "123", "jose@ifpb", null);
+            p = Fachada.cadastrarAdministrador("admin1", "123", "admin@ifpb", null, "DTI");
             System.out.println("\n-------- listar todas pessoas---------");
             System.out.println(Fachada.listarPessoas(""));
             System.out.println("-------- listar  pessoas jo---------");
@@ -82,9 +82,9 @@ public class TesteConsole {
             System.out.println("-------- caixa de saida admin---------");
             imprimirMensagens(Fachada.listarCaixaSaida());
             System.out.println("\n\n******* espionando as mensagens do sistema*********");
-            ///imprimirMensagens(Fachada.espionarMensagens(""));
+            imprimirMensagens(Fachada.espionarMensagens(""));
             System.out.println("-------- espionando as mensagens do sistema---------");
-            ///imprimirMensagens(Fachada.espionarMensagens("saudade"));
+            imprimirMensagens(Fachada.espionarMensagens("saudade"));
             ///System.out.println("\n-------- RELATOIO 1 - pessoas q nao enviaram mensagens---------");
             ///System.out.println(Fachada.relatorio1());
             System.out.println("\n-------- RELATOIO 2 - mensagens com emitente igual destinatario---------");
