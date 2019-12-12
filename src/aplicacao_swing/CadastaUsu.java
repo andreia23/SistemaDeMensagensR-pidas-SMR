@@ -93,7 +93,7 @@ public class CadastaUsu extends JFrame {
 						ImageIcon imagem = new ImageIcon(getClass().getResource(imageField.getText()));
 
 						Pessoa usuario = Fachada.cadastrarPessoa(nome, senha, email, imagem);
-						lblmsg.setText("cadastrou: "+usuario.getEmail());
+						lblmsg.setText("cadastrou: "+usuario.getNome());
 						nomeField.setText("");
 						passwordField.setText("");
 						nomeField.requestFocus();
