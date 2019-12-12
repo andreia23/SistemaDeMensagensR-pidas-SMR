@@ -63,7 +63,9 @@ public class Repositorio {
 	}
 	
 	public void removerMensagem(Mensagem mensagem){
-		Mensagens.remove(mensagem);
+		mensagem.getDestinatario().getCaixaEntrada().remove(mensagem);
+		mensagem.getEminente().getCaixaSaida().remove(mensagem);
+		//Mensagens.remove(mensagem);
 	}
 	
 	
