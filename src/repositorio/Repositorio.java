@@ -27,6 +27,15 @@ public class Repositorio {
 		Pessoas.put(p.getEmail()+p.getSenha(),  p); //chave concatenada
 	}*/
 
+	public void adicionarMensagem(Mensagem mensagem) {
+		mensagem.add(mensagem);
+	}
+	public void removermensagem(Mensagem mensagem){
+		mensagem.remove(mensagem);
+	}
+	public Mensagem localizarMensagem(int idmensagem) {
+		//falta
+	}
 	
 	public ArrayList<Pessoa> getPessoas(String termo) {
 		 if (termo == null) {
@@ -56,7 +65,5 @@ public class Repositorio {
 	
 
 
-  public void removermensagem(Mensagem m){
-    mensagem.remove(m)
-  }
+
 }
