@@ -16,22 +16,9 @@ public class Repositorio {
 		Pessoas.put(u.getEmail()+u.getSenha(),  u); //chave concatenada
 	}
 	
-	
-	public ArrayList<Pessoa> getPessoas(String termo) {
-		 if (termo == null) {
-			 new ArrayList<Pessoa> (Pessoas.values());	//TreeMap --> ArrayList
-		 } else {
-			 
-			 ArrayList<Pessoa> pessoas = new ArrayList<>();
-			 for(Pessoa p : Pessoas.values()){
-		            if(p.getNome().equals(termo))
-		                pessoas.add(p);
-		     return pessoas;
-			 }
-			
-		}
-		return null;
-				
+	public ArrayList<Pessoa> getPessoas() {
+		return  
+				new ArrayList<Pessoa> (Pessoas.values());	//TreeMap --> ArrayList
 	}
 	
 	
@@ -39,6 +26,16 @@ public class Repositorio {
 		return Pessoas.get(email+senha);
 	}
 	
+	public Pessoa localizarUsuario(String email){
+		String num = null;
+		for (String m : Pessoas.keySet()) {
+			if (m.contains(email))
+				num = m;
+				
+		}
+		return Pessoas.get(num);
+	}
+
 	
 	public void remover(Pessoa u){
 		Pessoas.remove(u.getEmail()+u.getSenha());
