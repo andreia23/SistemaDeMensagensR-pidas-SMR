@@ -15,7 +15,7 @@ public class Pessoa {
 	private ImageIcon iconimage;
     
     //Construtor
-	public Pessoa(String emal, String senha, String nome, ImageIcon iconimage) {
+	public Pessoa( String nome,String senha,String emal, ImageIcon iconimage) {
 		super();
 		this.email = emal;
 		this.senha = senha;
@@ -34,7 +34,7 @@ public class Pessoa {
 	
 	
 	
-	// Métodos getters e setters
+	// MÃ©todos getters e setters
 	public String getEmail() {
 		return email;
 	}
