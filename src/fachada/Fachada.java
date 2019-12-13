@@ -223,9 +223,6 @@ public class Fachada {
 
 
 
-	//Espionar Mensagem - arraylist
-	//Retorna as mensagens cujo texto contem o termo fornecido
-
 
 	//Relatorio 01 - arraylist
 	//Retorna as pessoas que nao enviaram mensagem
